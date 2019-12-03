@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Monitor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <h1 style="text-align: center">GPU Web Monitor UI</h1>
+        <div class="col-md-10 col-md-offset-1">
+            Tensorboard Port: <input type="text" class="form-control" value="6006">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>GPU</th>
+                    <th>PID</th>
+                    <th>USER</th>
+                    <th>GPU Memory</th>
+                    <th>%CPU</th>
+                    <th>%Memory</th>
+                    <th>Time</th>
+                    <th>Command</th>
+                    <th>Show board</th>
+                    <th>Kill</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in range(p_list|length) %}
+                    <tr>
+                        <td>{{ p_list[i][0] }}</td>
+                        <td>{{ p_list[i][1] }}</td>
+                        <td>{{ p_list[i][2] }}</td>
+                        <td>{{ p_list[i][3] }}</td>
+                        <td>{{ p_list[i][4] }}</td>
+                        <td>{{ p_list[i][5] }}</td>
+                        <td>{{ p_list[i][6] }}</td>
+                        <td>{{ p_list[i][7] }}</td>
+                        <td><a data-toggle="collapse" aria-expanded="false" class="False btn btn-success collapsed" href="#collapse{{ i }}" aria-controls="collapse0">Show</a></td>
+                        {% if p_list[i][8] %}
+                            <td><a href="/kill/{{ p_list[i][1] }}" class="btn btn-success">Kill</a></td>
+                        {% else %}
+{#                            <td>Can't Show</td>#}
+                            <td>Can't Kill</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                {% for i in range(p_list|length) %}
+                <div class="panel-collapse collapse" data-expanded="false" role="tabpanel" id="collapse{{ i }}" aria-labelledby="heading{{ i }}" aria-expanded="false" style="height: 0px;">
+                    <p>Process ID:{{ p_list[i][1] }}, runs {{ p_list[i][7] }}</p>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
