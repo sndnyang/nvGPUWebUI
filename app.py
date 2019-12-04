@@ -18,12 +18,14 @@ def index():
     return render_template('index.html', meta=meta, version=version, p_list=process_list)
 
 
-@app.route('/kill')
-def kill_my_process():
-    pid = request.json.get('pid')
+@app.route('/kill/<pid>')
+def kill_my_process(pid):
+    # pid = request.json.get('pid')
     result = {'err_no': 0, 'err_msg': 'Success'}
-
-    os.kill(pid)
+    try:
+        os.kill(int(pid), 9)
+    except PermissionError:
+        result = {'err_no': 1, 'err_msg': 'Operation not permitted'}
 
     return json.dumps(result, ensure_ascii=False)
 

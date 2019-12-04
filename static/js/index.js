@@ -9,3 +9,19 @@ function update_port(obj) {
         div.attr('src', "http://localhost:" + port + "/#scalars&regexInput=" + pid);
     }
 }
+
+function kill(obj, pid) {
+    $.ajax({
+        method: "get",
+        url: "/kill/" + pid,
+        contentType: 'application/json',
+        dataType: "json",
+        success : function (data){
+            if (data.err_no) {
+                alert(data.err_msg);
+                return;
+            }
+            $(obj).parent().html('success');
+        }
+    });
+}
