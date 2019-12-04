@@ -5,7 +5,7 @@ function update_port(obj) {
     let div_list = $("iframe");
     for (let i in div_list) {
         let div = $(div_list[i]);
-        let pid = div.id;
+        let pid = div.attr('id');
         div.attr('src', "http://localhost:" + port + "/#scalars&regexInput=" + pid);
     }
 }

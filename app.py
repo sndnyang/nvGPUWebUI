@@ -5,7 +5,7 @@ from nvAPI import get_process_info
 
 app = Flask(__name__)
 
-version = 2.0
+version = 1.0
 
 
 @app.route('/')
