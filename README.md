@@ -9,9 +9,19 @@ A web-based tool for monitoring/killing processes running on GPUs, integrating w
 
 # Usage
 
+
+
 0. Install flask
+
 1. Set the flask port in app.py, then python app.py
+
 2. Open the web page, change the default tensorboard port.
+
+   
+
+- Click Button "Show" to toggle the iframe.
+
+- Click Button 'Kill' to kill your process.
 
 # LICENSE
 
@@ -20,8 +30,6 @@ See LICENSE
 
 
 # ChangeLog
-
-
 
 ## 2019-12-04 V1.0
 
