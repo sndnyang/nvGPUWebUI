@@ -3,6 +3,9 @@ function update_port(port) {
     if (port === 0) {
         port = $("#port").val();
     }
+    if (port !== localStorage.getItem('port')) {
+        localStorage.setItem('port', port);
+    }
     let div_list = $("iframe");
     for (let i in div_list) {
         let div = $(div_list[i]);
